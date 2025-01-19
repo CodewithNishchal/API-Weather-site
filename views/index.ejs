@@ -9,14 +9,28 @@
 <body>
     <div class="back_stage">
         <div class="main_weather">
-            <form action="/" method="post">
-                <% if(locals.value) { %>
-                    
-                    <% } else { %>
-                        <input type="text" name="name" id="" value="location">    
-                    <% } %>
-                <input type="submit">
-            </form>
+            <% if (locals.value) {%> 
+                <div id="value">
+                    <div class="temp">
+                        <h2><%= value.main.temp %>॰</h2>
+                        <p><%= value.weather[0].main %> <%= value.main.temp_min %>॰ / <%= value.main.temp_max %>॰ <%= value.weather[0].description %> </p>
+                    </div>
+                    <div class="details">
+                        <div> <img src="images/Thermometer.png" alt="This is the icon for humidity"> <br> Feels Like <br> <p class="data"> <%= value.main.feels_like %>॰C </p></div>
+                        <div> <img src="images/humidity.png" alt="This is the icon for humidity"> <br> Humidity <p class="data"><%= value.main.humidity %> Km</p></div>
+                        <div> <img src="images/pressure.png" alt="This is the icon for humidity"> <br> Pressure <p class="data pressure"><%= value.main.pressure %> Pa</p></div>
+                        <div> <img src="images/winds.png" alt="This is the icon for humidity"> <br> wind speed <p class="data"><%= value.wind.speed %> Km/h</p></div>
+                        <div> <img src="/images/visibility.png" alt="This is the icon for humidity"> <br> Visibility <p class="data"><%= value.visibility %> Km</p></div>
+                        <div> <img src="/images/clouds.png" alt="This is the icon for humidity"> <br> Clouds <p class="data"><%= value.clouds.all %>%</p></div>
+                    </div>
+                </div>
+            <% } else { %>
+                <h2 id="city_search">Search for the CITY</h2>
+                <form action="/" method="post" class="input">
+                    <input type="text" name="name" id="text" placeholder="location">
+                    <input type="submit" class="sub" value="Search">
+                </form>
+            <% } %>
         </div> 
     </div>
 </body>

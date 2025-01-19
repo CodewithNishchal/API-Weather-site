@@ -25,15 +25,15 @@ app.post("/", async (req, res) => {
         lat = result.lat;
     }
     catch (error) {
-    res.render("test.ejs", { content: "fucked up" });
+    res.send("retrieving city data, Kidnly check for spelling errors");
     }
 
     try {
-        const answer = await axios.get("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=metric&appid=" + api_key);
-        res.render("test.ejs", {content: JSON.stringify(answer.data)});
+        const answer = await axios.get("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=metric&appid=" + api_key);    
+        res.render("index.ejs", {value: answer.data});
     }
     catch (error) {
-    res.render("test.ejs", { content: " "});
+        res.send("Error retrieving data");
     }
 })
 
